@@ -13,7 +13,7 @@ function App() {
   return (
   <div className="App">
     <nav>
-      <h1>Heptordle</h1>
+      <h1>Wooooooordle</h1>
       </nav>
       <AppContext.Provider value={{board, setBoard, currAttempt, setCurrAttempt}}>
         <div className='game'>
