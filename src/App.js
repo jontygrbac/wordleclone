@@ -41,6 +41,7 @@ function App() {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
+      console.log(words.todaysWord);
     });
   }, []);
 
@@ -64,7 +65,6 @@ function App() {
     setCurrAttempt({ ...currAttempt, letterPos: currAttempt.letterPos - 1 });
   };
 
-  console.log(correctWord);
   // If the keyVal is ENTER, ensure letterVal is at the final tile
   // If it is set our attempt to move down a single row
   const onEnter = () => {
