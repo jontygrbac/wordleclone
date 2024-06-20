@@ -199,3 +199,24 @@ h3 {
     width: 90%;
   }
 }
+
+.restartButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: Poppins, sans-serif;
+  color: white;
+  background-color: #528d4e;
+  border: none;
+  border-radius: 0.25rem; /* 4px */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restartButton:hover {
+  background-color: #528d9f;
+}
+
+p {
+  font-family: Poppins, sans-serif;
+}

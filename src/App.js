@@ -41,7 +41,6 @@ function App() {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-      console.log(correctWord);
     });
   }, []);
 
@@ -64,6 +63,8 @@ function App() {
     setBoard(newBoard);
     setCurrAttempt({ ...currAttempt, letterPos: currAttempt.letterPos - 1 });
   };
+
+  console.log(correctWord);
   // If the keyVal is ENTER, ensure letterVal is at the final tile
   // If it is set our attempt to move down a single row
   const onEnter = () => {
@@ -122,6 +123,12 @@ function App() {
           <Board />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
+        <footer>
+          <p>
+            Wordle Clone for Practice of React, please check out{" "}
+            <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>
+          </p>
+        </footer>
       </AppContext.Provider>
     </div>
   );
