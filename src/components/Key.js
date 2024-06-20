@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
 
-function Key({ keyVal, bigKey, disabled }) {
+function Key({ keyVal, bigKey, disabled, correct, almost }) {
   const { onDelete, onSelectLetter, onEnter } = useContext(AppContext);
 
   const selectLetter = () => {
@@ -17,7 +17,13 @@ function Key({ keyVal, bigKey, disabled }) {
     // Adjusting big and small lettering
     <div
       className="key"
-      id={bigKey ? "big" : disabled && "disabled"}
+      id={
+        bigKey
+          ? "big"
+          : (disabled && "disabled") ||
+            (correct && "correct") ||
+            (almost && "almost")
+      }
       onClick={selectLetter}
     >
       {keyVal}

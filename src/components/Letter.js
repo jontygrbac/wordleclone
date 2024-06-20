@@ -2,8 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { AppContext } from "../App";
 
 function Letter({ letterPosition, attemptVal }) {
-  const { board, correctWord, currAttempt, setDisabledLetters } =
-    useContext(AppContext);
+  const {
+    board,
+    correctWord,
+    currAttempt,
+    setDisabledLetters,
+    setCorrectLetters,
+    setAlmostLetters,
+  } = useContext(AppContext);
   const letter = board[attemptVal][letterPosition];
 
   //If position on word is the same as the cell
@@ -20,6 +26,18 @@ function Letter({ letterPosition, attemptVal }) {
   useEffect(() => {
     if (letter !== "" && !correct && !almost) {
       setDisabledLetters((prev) => [...prev, letter]);
+    }
+  }, [currAttempt.attempt]);
+
+  useEffect(() => {
+    if (letter !== "" && correct) {
+      setCorrectLetters((prev) => [...prev, letter]);
+    }
+  }, [currAttempt.attempt]);
+
+  useEffect(() => {
+    if (letter !== "" && almost) {
+      setAlmostLetters((prev) => [...prev, letter]);
     }
   }, [currAttempt.attempt]);
 

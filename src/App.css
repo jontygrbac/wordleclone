@@ -164,3 +164,38 @@ h3 {
 .gameOver {
   padding: 2rem;
 }
+
+@media (max-width: 700px) {
+  .board {
+    width: 90%;
+    height: 100%;
+  }
+
+  .keyboard {
+    width: 95%;
+    height: 60%;
+  }
+
+  .key {
+    width: 2.5rem; /* 40px */
+    height: 3.5rem; /* 56px */
+    margin: 0.25rem; /* 4px */
+    font-size: 1rem; /* 16px */
+  }
+
+  .letter {
+    font-size: 1.5rem;
+  }
+
+  #big {
+    width: 3.4rem; /* 80px */
+  }
+
+  nav h1 {
+    font-size: 2rem; /* 32px */
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
