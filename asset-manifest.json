@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/wordleclone/static/css/main.824e9cc4.css",
+    "main.js": "/wordleclone/static/js/main.6cea21e6.js",
+    "static/js/453.6132f90f.chunk.js": "/wordleclone/static/js/453.6132f90f.chunk.js",
+    "static/media/seven_letter_words.txt": "/wordleclone/static/media/seven_letter_words.abbe0589b3f02a81b6da.txt",
+    "index.html": "/wordleclone/index.html",
+    "main.824e9cc4.css.map": "/wordleclone/static/css/main.824e9cc4.css.map",
+    "main.6cea21e6.js.map": "/wordleclone/static/js/main.6cea21e6.js.map",
+    "453.6132f90f.chunk.js.map": "/wordleclone/static/js/453.6132f90f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.824e9cc4.css",
+    "static/js/main.6cea21e6.js"
+  ]
+}
