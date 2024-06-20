@@ -1,15 +1,47 @@
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
-import { boardDefault } from "./Words";
-import { createContext, useState } from "react";
+import GameOver from "./components/GameOver";
+import { boardDefault, generateWordSet } from "./Words";
+import { createContext, useEffect, useState } from "react";
 
 //Allows for states to be transfered a lot easier
 export const AppContext = createContext();
+const showModal = () => {
+  const modal = document.getElementById("wordNotFoundModal");
+
+  modal.style.display = "block";
+
+  // Hide the modal after 1 second (1000 milliseconds)
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 1000);
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+};
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0 });
+  const [wordSet, setWordSet] = useState(new Set());
+  const [disabledLetters, setDisabledLetters] = useState([]);
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
+  const [correctWord, setCorrectWord] = useState("");
+
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet);
+      setCorrectWord(words.todaysWord);
+      console.log(correctWord);
+    });
+  }, []);
 
   // For all other letters, ensure that letters only go to the 7th tile
   // If valid set the tile and move the letterPos by 1
@@ -34,7 +66,25 @@ function App() {
   // If it is set our attempt to move down a single row
   const onEnter = () => {
     if (currAttempt.letterPos !== 7) return;
-    setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos: 0 });
+
+    let currWord = "";
+    for (let i = 0; i < 7; i++) {
+      currWord += board[currAttempt.attempt][i];
+    }
+
+    if (wordSet.has(currWord)) {
+      setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos: 0 });
+    } else {
+      showModal();
+    }
+
+    if (currWord === correctWord) {
+      setGameOver({ gameOver: true, guessedWord: true });
+      return;
+    }
+    if (currAttempt.attempt === 5) {
+      setGameOver({ gameOver: true, guessedWord: false });
+    }
   };
   return (
     <div className="App">
@@ -50,11 +100,21 @@ function App() {
           onSelectLetter,
           onDelete,
           onEnter,
+          correctWord,
+          disabledLetters,
+          setDisabledLetters,
+          gameOver,
+          setGameOver,
         }}
       >
         <div className="game">
+          <div id="wordNotFoundModal" class="modal">
+            <div class="modal-content">
+              <p className="modal__p">Word Not Found</p>
+            </div>
+          </div>
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
     </div>

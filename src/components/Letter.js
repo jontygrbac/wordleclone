@@ -1,10 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../App";
 
 function Letter({ letterPosition, attemptVal }) {
-  const { board } = useContext(AppContext);
+  const { board, correctWord, currAttempt, setDisabledLetters } =
+    useContext(AppContext);
   const letter = board[attemptVal][letterPosition];
-  return <div className="letter">{letter}</div>;
+
+  //If position on word is the same as the cell
+  const correct = correctWord[letterPosition] === letter;
+
+  //If it isn't correct, isn't black and is included in the word
+  const almost = !correct && letter !== "" && correctWord.includes(letter);
+
+  //Determining the id, will only be allowed when attemptVal has reached it's max
+  const letterState =
+    currAttempt.attempt > attemptVal &&
+    (correct ? "correct" : almost ? "almost" : "error");
+
+  useEffect(() => {
+    if (letter !== "" && !correct && !almost) {
+      setDisabledLetters((prev) => [...prev, letter]);
+    }
+  }, [currAttempt.attempt]);
+
+  return (
+    <div className="letter" id={letterState}>
+      {letter}
+    </div>
+  );
 }
 
 export default Letter;
